@@ -5,9 +5,6 @@ function App() {
   return (
     <>
       <Form />
-      <div className="card">
-        <h2>Comming soon</h2>
-      </div>
     </>
   )
 }

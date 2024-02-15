@@ -40,11 +40,10 @@ function Form() {
                     value={people}
                     onChange={(e) => setPeople(e.target.value)}
                 />
-                <button onClick={billTotal}>Calculate Total</button>
             </form>
             <div>
-                <h3>Tip Amount ${tip.toFixed(2)}</h3>
-                <h3>Total ${total.toFixed(2)}</h3>
+                <h3>Tip Amount ${tip}</h3>
+                <h3>Total: ${billTotal}</h3>
             </div>
         </div>
     );

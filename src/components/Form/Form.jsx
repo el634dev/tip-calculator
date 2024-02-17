@@ -1,49 +1,75 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import './Form.css'
 
 function Form() {
-    const [bill, setBill] = useState(0.0);
-    // Tip Amount
-    const [tip, setTip] = useState(10);
-    // Number of people
+    const [billAmount, setBillAmount] = useState('');
+    // People
     const [people, setPeople] = useState(0);
+    // Tip Percentage
+    const [tipPercentage, setTipPercentage] = useState(10);
     // Total Amount
-    const [total, setTotal] = useState(0);
+    const [totalAmount, setTotalAmount] = useState('');
 
-    const billTotal = () => {
-        const tipAmount = (bill * tip) / 100;
-        const billAmount = Number(bill) + tipAmount;
-        setTip(tipAmount);
-        setTotal(billAmount);
-    };
+    // Handle Bill
+    const handleBillChange = (e) => {
+        setBillAmount(e.target.value);
+    }
+
+    // Handle Tip
+    const handleTipChange = (e) => {
+        setTipPercentage(parseInt(e.target.value));
+    }
+
+    // Handle People
+    const handlePeopleChange = (e) => {
+        setPeople(e.target.value);
+    }
+
+    // Handle Total 
+    const handleTotalChange = () => {
+        const tip = (billAmount * tipPercentage) / 100;
+        const totalAmount = parseFloat(billAmount) + tip / people;
+        
+        setTotalAmount(totalAmount.toFixed(2));
+    }
 
     return (
-        <div>
-            <form>
-                <label>Bill</label>
-                <input 
-                    type='text'
-                    value={bill}
-                    onChange={(e) => setBill(e.target.value)}
-                />
-                {/* Tip Amount */}
-                <label>Tip %</label>
+        <div className='Form-Calculator'>
+            <h2 className='Form-Title'>Tip Calculator</h2>
+            <div className='Form-Bill-Amount'>
+                <label>Bill Amount:</label>
                 <input 
                     type='number'
-                    value={tip}
-                    onChange={(e) => setTip(e.target.value)}
-                    placeholder='Tip %'
+                    value={billAmount}
+                    onChange={handleBillChange}
                 />
-                {/* Number of people */}
-                <label>Number of people</label>
+            </div>
+            {/* Tip Percentage */}
+            <div className='Form-Tip-Amount'>
+                <label>Tip Percentage:</label>
+                <input 
+                    type='number'
+                    value={tipPercentage}
+                    onChange={handleTipChange}
+                />
+            </div>
+            {/* Number of People */}
+            <div className='Form-People'>
+                <label>Number of People:</label>
                 <input 
                     type='number'
                     value={people}
-                    onChange={(e) => setPeople(e.target.value)}
+                    onChange={handlePeopleChange}
                 />
-            </form>
-            <div>
-                <h3>Tip Amount ${tip}</h3>
-                <h3>Total: ${billTotal}</h3>
+            </div>
+            {/* Calculate Total Button */}
+            <div className='Form-Button'>
+                <button onClick={handleTotalChange}>Calculate</button>
+            </div>
+            {/* Total Amount Display */}
+            <div className='Form-Amount-Display'>
+                <h3>Total Amount: {totalAmount}</h3>
+                <h3>Tip Amount: {tipPercentage}</h3>
             </div>
         </div>
     );

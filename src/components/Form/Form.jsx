@@ -49,6 +49,7 @@ function Form() {
                 <label>Tip Percentage:</label>
                 <input 
                     type='number'
+                    min={5}
                     value={tipPercentage}
                     onChange={handleTipChange}
                 />
@@ -58,6 +59,7 @@ function Form() {
                 <label>Number of People:</label>
                 <input 
                     type='number'
+                    min={1}
                     value={people}
                     onChange={handlePeopleChange}
                 />
